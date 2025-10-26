@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
+import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 function now() {
   return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -92,6 +94,11 @@ export default function App() {
     return JSON.stringify(data)
   }
 
+  const renderMarkdown = (md) => {
+    const html = marked.parse(md || '')
+    return { __html: DOMPurify.sanitize(html) }
+  }
+
   const renderMessage = (m, i) => {
     if (m.role === 'system') return null
     const isUser = m.role === 'user'
@@ -99,7 +106,7 @@ export default function App() {
       <div key={i} className={`row ${isUser ? 'user' : 'assistant'}`}>
         <div className={`avatar ${isUser ? 'user' : 'assistant'}`}>{isUser ? 'U' : 'A'}</div>
         <div>
-          <div className={`bubble ${m.role}`}>{m.content}</div>
+          <div className={`bubble ${m.role}`} dangerouslySetInnerHTML={renderMarkdown(m.content)} />
           <div className="meta">{isUser ? 'You' : 'Agent'} • {m.time || ''}</div>
         </div>
       </div>
@@ -109,8 +116,8 @@ export default function App() {
   return (
     <div className="container">
       <div className="header">
-        <div className="title">Chatbot — Gemini</div>
-        <div className="subtitle">Securely proxying requests through your server</div>
+        <div className="title">GemiX</div>
+        <div className="subtitle">Hey! I’m here to help you out 🤖✨</div>
       </div>
 
       <div className="chat" ref={listRef}>
