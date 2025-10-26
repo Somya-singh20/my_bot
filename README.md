@@ -1,59 +1,47 @@
-﻿### Setup — run this project locally
+﻿# Chatbot Project
 
-This README contains only the minimal steps to set up and run the project on a Windows machine (PowerShell). It assumes you have Node.js and npm installed.
+A MERN-based chatbot that uses the Gemini API to provide AI-powered responses in real-time.
 
-Prerequisites
-- Node.js (v16+ recommended) and npm
+---
 
-1) Install server dependencies and create .env
+## Description
 
-Open PowerShell and run:
+This project is a **full-stack chatbot** built with **MongoDB, Express, React, and Node.js (MERN)**.  
+It allows users to interact with an AI bot through a web interface. The backend securely handles API requests, keeping your API keys safe.
 
-`powershell
-cd C:\Users\somya\OneDrive\Desktop\chatbot\server
+**Features:**
+- Real-time chatbot responses
+- Secure API key management on the server
+- Interactive web interface
+- Easy to run locally or deploy
+
+---
+
+## Technologies Used
+
+- **Frontend:** React, Vite
+- **Backend:** Node.js, Express
+- **Database:** MongoDB
+- **API Integration:** Gemini API
+
+---
+
+## Quick Start
+
+Clone the repository and run the server and client:
+
+```bash
+git clone https://github.com/Somya-singh20/my_bot.git
+cd my_bot
+
+# Server
+cd server
 npm install
-# copy the example and edit it (or create a new .env)
 copy .env.example .env
-notepad .env
-# In the .env file set your provider configuration, for example either:
-# GEMINI_PROVIDER=google
-# GEMINI_API_KEY=YOUR_GOOGLE_API_KEY
-# GEMINI_MODEL=gemini-2.5-flash
-# OR for a generic provider:
-# GEMINI_API_URL=https://your-provider.example/v1/generate
-# GEMINI_API_KEY=YOUR_PROVIDER_KEY
-# PORT=4000
-`
-
-2) Install client dependencies
-
-`powershell
-cd C:\Users\somya\OneDrive\Desktop\chatbot\client
-npm install
-`
-
-3) Run server and client (two terminals)
-
-Terminal A — server:
-
-`powershell
-cd C:\Users\somya\OneDrive\Desktop\chatbot\server
+# Add your Gemini API key in .env
 npm run dev
-`
 
-Terminal B — client:
-
-`powershell
-cd C:\Users\somya\OneDrive\Desktop\chatbot\client
+# Client (in a separate terminal)
+cd ../client
+npm install
 npx vite
-# or: npm run dev
-`
-
-Open the URL the Vite dev server prints (e.g. http://localhost:5173 or http://localhost:5174) in your browser.
-
-Notes
-- Keep server/.env out of version control (add it to .gitignore).
-- The backend proxies requests to the LLM provider so API keys stay on the server.
-- If you see port conflicts, either stop the process holding the port or start Vite with --port <n>.
-
-That's all — these steps are all you need to run the project locally.
